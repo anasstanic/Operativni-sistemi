@@ -1,6 +1,6 @@
 # Operativni-sistemi – ETF
 
-Teorijske beleške i projekat iz predmeta Operativni sistemi na Elektrotehničkom fakultetu u Beogradu.
+Projekat i gradivo iz predmeta Operativni sistemi na Elektrotehničkom fakultetu u Beogradu.
 
 ## Sadržaj
 
