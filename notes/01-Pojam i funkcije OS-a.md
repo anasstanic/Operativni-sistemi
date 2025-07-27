@@ -28,15 +28,35 @@ Operativni sistem je skup rutina koje obavljaju operacije sa hardverskim uredjaj
 ## Delovi operativnog sistema:
 
 ### jezgro (engl. kernel)
-### sistemski programi
-### korisnicki interfejs
-
-
-
-
-
-
-
+-deo operativnog sistema koji je uvek ucitan u operativnu memoriju ili se ucitava prilikom ukljucivanja racunara i tu ostaje do njegovog iskljucenja.
+-izvrsava osnovne funkcije OS-a 
+-pruza usluge programima koji se izvrsavaju na racunaru
+### sistemski programi (engl. system program)
+-programi koji se izvrsavaju kao i svi ostali korisnicki programi, ali od njih se razlikuju jer se isporucuju kao sastavni deo OS-a
+-obavljaju opste radnje za razliku od korisnickih programa: kopiranje fajlova, pravljenje rezervne kopije...
+-mogu se pokretati po potrebi, dakle ne zauzimaju stalno memoriju kao sto je slucaj sa kernelom 
+->otkaz u jezgru uzrokuje otkaz celog sistema, dok otkaz u sistemskim pozivima ne uzrokuje otkaz sistema
+### korisnicki interfejs (engl. user interface)
+-deo OS-a za interakciju sa korisnikom
+-dva tipa UI:
+1) interpreter komandne linije (engl. command line interpreter CLI)
+   -tastatura je ulazni znakovno orijentisan sekvencijalni uredjaj sa kojeg se uzitava znak po znak
+   -monitor je izlazni znakovno orijentisan sekvencijalni uredjaj
+   ->ovaj par uredjaja naziva se **konzola tj terminal**
+   -CLI se zasniva na ciklicnom izrsavanju operacija:
+   1) na ekran ispisuje znak > ili $ kao pokazatelj spremnosti da primi znakove sa ulaza
+   2) ucitava znak po znak sa tastature dok ne naidje na enter
+   3) uneti niz znakova rasclanjuje na podnizove: komanda i argumenti komande; opciono komanda ispisuje nesto na ekran
+   4) spreman za novu komandu
+  ->skup komandi moze se spakovati u **pakete ili skripte** kako se ne bi morala unositi komenda po komanda
+   -CLI moze biti implementiran u okviru kernela ili kao sistemski program(engl. shell);
+   Ukoliko je implementiran kao sistemski poziv moze imati vise varijacija: kod za obradu komandi se nalazi u samom interpreteru (npr interpreter MS DOS) INTERNE KOMANDE ukoliko cli ne nadje komendu on je tretira kao ekstrenu i trazi je u sistemskim programima ili slucaj 2 kada glavna rutina interpretera uscitava komandnu liniju, izdvaja komandu i njene argumente a zatim pokrece program koji je dat tom komandom i prosledjuje mu argumente; dakle u ovom drugom slucaju implementacija komandi je izmestena u posebne programe cime se postize da je interpreter krajnje jednostavan.
+3) graficki korisnicki interfejs (engl. graphical user interface GUI)
+   -intuitivan
+   -ekran je rasterski izlazni uredjaj za prikaz matrice pixela u boji
+   -od ulaznih uredjaja koriste e tatstaura, mis, olovka, touch screen
+   -nudi desktop t apstrakciju radne povrsine, slicice (vizuelni prikaz)
+   -korisnik zadaje komande intuitivnim akcijama nad objektima, prisutan je polimorfisam jer se iste akcije nad razlicitim tipom objekata razlicito ispoljavaju
 
 
 
