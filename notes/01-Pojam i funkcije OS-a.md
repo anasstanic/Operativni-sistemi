@@ -37,26 +37,30 @@ Operativni sistem je skup rutina koje obavljaju operacije sa hardverskim uredjaj
 -mogu se **pokretati po potrebi, dakle ne zauzimaju stalno memoriju** kao sto je slucaj sa kernelom  
 **->** otkaz u jezgru uzrokuje otkaz celog sistema, dok otkaz u sistemskim pozivima ne uzrokuje otkaz sistema  
 ### korisnicki interfejs (engl. user interface)
--deo OS-a za interakciju sa korisnikom
--dva tipa UI:
-1) interpreter komandne linije (engl. command line interpreter CLI)
-   -tastatura je ulazni znakovno orijentisan sekvencijalni uredjaj sa kojeg se uzitava znak po znak
-   -monitor je izlazni znakovno orijentisan sekvencijalni uredjaj
-   ->ovaj par uredjaja naziva se **konzola tj terminal**
-   -CLI se zasniva na ciklicnom izrsavanju operacija:
-   1) na ekran ispisuje znak > ili $ kao pokazatelj spremnosti da primi znakove sa ulaza
+-deo OS-a za interakciju sa korisnikom  
+-dva tipa UI:  
+1) interpreter komandne linije (engl. command line interpreter CLI)  
+   -tastatura je ulazni znakovno orijentisan sekvencijalni uredjaj sa kojeg se ucitava znak po znak  
+   -monitor je izlazni znakovno orijentisan sekvencijalni uredjaj  
+   ->ovaj par uredjaja naziva se **konzola tj terminal**  
+   -CLI se zasniva na ciklicnom izrsavanju operacija:  
+   1) na ekran ispisuje znak > ili $ kao pokazatelj spremnosti da primi znakove sa ulaza (engl. command prompt)
    2) ucitava znak po znak sa tastature dok ne naidje na enter
-   3) uneti niz znakova rasclanjuje na podnizove: komanda i argumenti komande; opciono komanda ispisuje nesto na ekran
-   4) spreman za novu komandu
-  ->skup komandi moze se spakovati u **pakete ili skripte** kako se ne bi morala unositi komenda po komanda
-   -CLI moze biti implementiran u okviru kernela ili kao sistemski program(engl. shell);
-   Ukoliko je implementiran kao sistemski poziv moze imati vise varijacija: kod za obradu komandi se nalazi u samom interpreteru (npr interpreter MS DOS) INTERNE KOMANDE ukoliko cli ne nadje komendu on je tretira kao ekstrenu i trazi je u sistemskim programima ili slucaj 2 kada glavna rutina interpretera uscitava komandnu liniju, izdvaja komandu i njene argumente a zatim pokrece program koji je dat tom komandom i prosledjuje mu argumente; dakle u ovom drugom slucaju implementacija komandi je izmestena u posebne programe cime se postize da je interpreter krajnje jednostavan.
+   3) uneti niz znakova rasclanjuje na podnizove: komanda i argumenti komande;
+   4) izvrsava komandu, opciono komanda ispisuje nesto na ekran
+   5) spreman za novu komandu
+  ->skup komandi moze se spakovati u **pakete (engl. batch) ili skripte (engl. script)** kako se ne bi morala unositi komanda po komanda  
+   -CLI moze biti implementiran u okviru kernela ili kao sistemski program (engl. shell) koji se izvrsava kao svaki drugi program;  
+   Ukoliko je implementiran kao sistemski program moze imati vise varijacija:  
+   1) kod za obradu komandi se nalazi u samom interpreteru; glavna rutina interpretera ucitava komandnu liniju a potom prelazi na deo koda koji je zaduzen za izvrsavanje te komande. 
+   2) interpreter uscitava komandnu liniju, izdvaja komandu i njene argumente, zatim pokrece program koji je dat tom komandom i prosledjuje mu argumente; dakle u ovom drugom slucaju implementacija komandi je izmestena u posebne programe cime se postize da je interpreter krajnje jednostavan.
+   3) hibridna verzija interpretera: (npr interpreter MS DOS) INTERNE KOMANDE su implementirane unutar samog interpretera, ukoliko cli ne nadje komandu on je tretira kao EKSTERNU i trazi sistemski program sa tim nazivom
 3) graficki korisnicki interfejs (engl. graphical user interface GUI)
-   -intuitivan
-   -ekran je rasterski izlazni uredjaj za prikaz matrice pixela u boji
-   -od ulaznih uredjaja koriste e tatstaura, mis, olovka, touch screen
-   -nudi desktop t apstrakciju radne povrsine, slicice (vizuelni prikaz)
-   -korisnik zadaje komande intuitivnim akcijama nad objektima, prisutan je polimorfisam jer se iste akcije nad razlicitim tipom objekata razlicito ispoljavaju
+   -intuitivan  
+   -ekran je rasterski izlazni uredjaj za prikaz matrice pixela u boji  
+   -od ulaznih uredjaja koriste se tatstaura, mis, olovka, touch screen  
+   -nudi desktop apstrakciju radne povrsine, slicice (vizuelni prikaz)  
+   -korisnik zadaje komande intuitivnim akcijama nad objektima, prisutan je polimorfisam jer se iste akcije nad razlicitim tipom objekata razlicito ispoljavaju  
 
 
 
