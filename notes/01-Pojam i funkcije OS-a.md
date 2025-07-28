@@ -35,7 +35,7 @@ Operativni sistem je skup rutina koje obavljaju operacije sa hardverskim uredjaj
 -programi koji se **izvrsavaju kao i svi ostali korisnicki programi**, ali od njih se razlikuju jer **se isporucuju kao sastavni deo OS-a**  
 -obavljaju **opste radnje** za razliku od korisnickih programa: kopiranje fajlova, pravljenje rezervne kopije...  
 -mogu se **pokretati po potrebi, dakle ne zauzimaju stalno memoriju** kao sto je slucaj sa kernelom  
-**->**otkaz u jezgru uzrokuje otkaz celog sistema, dok otkaz u sistemskim pozivima ne uzrokuje otkaz sistema  
+**->** otkaz u jezgru uzrokuje otkaz celog sistema, dok otkaz u sistemskim pozivima ne uzrokuje otkaz sistema  
 ### korisnicki interfejs (engl. user interface)
 -deo OS-a za interakciju sa korisnikom
 -dva tipa UI:
