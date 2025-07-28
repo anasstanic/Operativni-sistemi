@@ -28,8 +28,8 @@ Operativni sistem je skup rutina koje obavljaju operacije sa hardverskim uredjaj
 ## Delovi operativnog sistema:
 
 ### jezgro (engl. kernel)
--deo operativnog sistema koji je uvek ucitan u operativnu memoriju ili se ucitava prilikom ukljucivanja racunara i tu ostaje do njegovog iskljucenja.
--izvrsava osnovne funkcije OS-a 
+-deo operativnog sistema koji je uvek ucitan u operativnu memoriju ili se ucitava prilikom ukljucivanja racunara i tu ostaje do njegovog iskljucenja.  
+-izvrsava osnovne funkcije OS-a  
 -pruza usluge programima koji se izvrsavaju na racunaru
 ### sistemski programi (engl. system program)
 -programi koji se izvrsavaju kao i svi ostali korisnicki programi, ali od njih se razlikuju jer se isporucuju kao sastavni deo OS-a
