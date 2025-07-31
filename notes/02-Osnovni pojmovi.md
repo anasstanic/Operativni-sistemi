@@ -21,8 +21,9 @@
 -je jedno izvrsenje programa na datom racunaru i pod kontrolom njegovog OS-a, koje potencijalno tece uporedo sa drugim takvim izvrsavanjima istog ili drugih programa.  
 - proces!=program  
   Program je staticki zapis tj specifikacija onoga sta racunar treba da uradi.  
-  Jedna aktivacija programa je proces, svako od tih izvrsavanja radi nad svojim podacima.  
-### Podela racunarskih sistema u odnosu na to koje programe moze izvrsavati  
+  Jedna aktivacija programa je proces, svako od tih izvrsavanja radi nad svojim podacima.
+   
+### Podela racunarskih sistema u odnosu na to koje programe moze izvrsavati:   
   Monoprogramski racunarski sistem  
     sistem koji izvrsava samo jedan program koji mu se zada, ne bilo koji; npr ugradjeni programi ves masina..  
   Multiprogramski racunarski sistem  
