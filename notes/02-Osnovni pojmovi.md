@@ -23,10 +23,11 @@
   Program je staticki zapis tj specifikacija onoga sta racunar treba da uradi.  
   Jedna aktivacija programa je proces, svako od tih izvrsavanja radi nad svojim podacima.  
 ### Podela racunarskih sistema u odnosu na to koje programe moze izvrsavati  
-  Monoprogramski racunarski sistem:  
+  Monoprogramski racunarski sistem  
     sistem koji izvrsava samo jedan program koji mu se zada, ne bilo koji; npr ugradjeni programi ves masina..  
-  Multiprogramski racunarski sistem:  
+  Multiprogramski racunarski sistem  
     sistem kojem mogu da se zadaju razliciti proizvoljni programi pisani za taj sistem  
+    
 ### Podela OS po tome koliko procesa moze da izvrsava uporedo:
     Monoprocesni  
       u 1 trenutku moze da se izvrsava samo 1 program; naredni program moze da se pokrene tek kada se zavrsi program koji se trenutno izvrsava  
