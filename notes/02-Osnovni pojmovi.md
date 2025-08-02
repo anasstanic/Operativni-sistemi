@@ -38,7 +38,6 @@
 
 ## MULTIPROGRAMIRANJE
 ### Prvi racunari su bili monoprocesni  
-**su imali paketne sisteme**
 -ulazni uredjaj je bio citac busenih kartica (engl. punched card reader)  
       nije bio povezan sa racunarom  
       tekst programa ili podaci su se unosili tastaturom u busac kartica koji je sluzio za binarno kodovanje unete znakove busenjem kartica  
