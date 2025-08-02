@@ -37,7 +37,7 @@
   ->svi sadasnji uredjaji su multiprogramski sa multiprocesorskim OSom  
 
 ## MULTIPROGRAMIRANJE
--prvi racunari su bili monoprocesni  
+### Prvi racunari su bili monoprocesni  
 **su imali paketne sisteme**
 -ulazni uredjaj je bio citac busenih kartica (engl. punched card reader)  
       nije bio povezan sa racunarom  
@@ -63,7 +63,7 @@
        <-I/O operation  
       dakle iz ovoga vidimo da je slaba iskoriscenost procesora, jer dok se obavlja I/O operacija proces mora da ceka, ovolika kolicina neiskoriscenosti je neprihvatljiva
 
-Resenje ovog problema: 
+### Resenje ovog problema: MULTIPROCESNI SISTEMI
       -u OM treba ucitati vise procesa i izvrsavati ih uporedo: dok jedan proces ceka na zavrsetak I/O operacija, CPU(procesor) moze da izvrsava instrukcije nekog drugog procesa koji je ucitan u OM => sistem postaje MULTIPROCESNI. Ovim smo dobili da se CPU vremenski multipleksira izmedju razlicitih procesa: ovo se naziva MULTIPROGRAMIRANJE (CPU u jednom momentu izvrsava instrukcije jednog procesa a u drugom trenutku izvrsava instrukcije drugog procesa...)  
       -Kada jedan proces zatrazi I/O operaciju=>OS obezbedjuje da CPU predje na izvrsavanje nekog drugog procesa.  
       -glavni dakle uslov za sprovodjenje ovog vida resenja jeste:  
@@ -72,13 +72,26 @@ Resenje ovog problema:
       -CPU je ovim mnogo bolje iskoriscen; stepen iskoriscenosti CPU raste sa porastom stepena multiprogramiranja  
       -ukupna **propusnost sistema** tj kolicina obavljenih procesa u jedinici vremena je sada mnogo veca nego za monoprocesni sistem  
 
-Nove odgvoornosti multiprocesnog OS-a:  
-      -Rasporedjivanje poslova (engl. job scheduling):  
+### Nove odgvoornosti multiprocesnog OS-a:  
+-**Rasporedjivanje poslova (engl. job scheduling):**  
             OS bira koje procese ce pokrenuti iz skupa poslova podnetih za izvrsavanje (engl. submitted)  
-      -Promena konteksta (engl. context switch):
-            OS obezbedjuje da se procesor sa izvrsavanja jednog procesa prebaci na izvrsavanje drugog, ali tako da moze da se lepo prebaci na ponovno izvrsavanje prethodnog procesa kao da nije bio prekinut
-      -Rasporedjivanje procesa na procesoru: (engl. process/processor scheduling)
-            OS bira koji proces ce dobiti CPU iz skupa procesa koji mogu da nastave izvrsavanje
+-**Promena konteksta (engl. context switch):**  
+            OS obezbedjuje da se procesor sa izvrsavanja jednog procesa prebaci na izvrsavanje drugog, ali tako da moze da se lepo prebaci na ponovno izvrsavanje prethodnog procesa kao da nije bio prekinut  
+-**Rasporedjivanje procesa na procesoru (engl. process/processor scheduling):**  
+            OS bira koji proces ce dobiti CPU iz skupa procesa koji mogu da nastave izvrsavanje  
+-**Preotimanje procesora (engl. preemption):**  
+            Treba zastititi sistem od situacije u kojoj neki proces nikada ne izvrsi sistemski poziv, preotme mu se procesor i problem je resen  
+-**Problem adresiranja memorije:**    
+            Omoguciti da svaki proces **adresira svoje insturukcije i podatke u OM** bez obzira na to sto se ne zna na kojoj adresi ce biti smestene instrukcije procesa prilikom ucitavanja u memoriju  
+-**Upravljanje memorijom (engl. memory management)**:  
+            OS mora smestiti procese u OM, rukovati slobodnim i zauzetim delovima memorije  
+-**Rasporedjivanje operacija na uredjajima (engl.device scheduling)**:  
+            OS opsluzuje zahteve za prekid za koriscenje i/o uredjaja na neki specifican nacin  
+-**Zastita (engl. protection):**  
+            Zastititi delove memorije koji pripadaju kernelu i procesima od uticaja drugih porcesa ili lose namere  
+      
+            
+            
             
 
       
