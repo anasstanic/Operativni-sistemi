@@ -99,6 +99,13 @@
 -**Zastita (engl. protection):**  
             Zastititi delove memorije koji pripadaju kernelu i procesima od uticaja drugih porcesa ili lose namere  
 
+## KONZOLA I STANDARDNI ULAZ/IZLAZ
+Mainframe racunari pojavljuju se 1070. i koriste se do 90ih.
+Sastojali su se od CPU, OM, I/O uredjaja (diskovi, stampaci magnetne trake..) + terminal tj konzola. Upravo ovo ih izdvaja od dosadasnjih racunara (pre 1970)  
+Konzola se sastojala iz monitora i tastature. Tastatura je ulazni uredjaj principijelno isti danasnjoj verziji. Monitori su sekvencijalni izlazni uredjaji, ponasa se isto kao i linijski stampac.  
+Na svakoj konzoli (terminalu) moze da radi jedan korisnik koji se prethodno logovao (engl. log in) pomocu korisnickog imena i lozinke; potom zadaje komande pomocu interpretera komandne linije (engl. CLI)  
+
+
 
       
             
