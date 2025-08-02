@@ -64,12 +64,23 @@
       dakle iz ovoga vidimo da je slaba iskoriscenost procesora, jer dok se obavlja I/O operacija proces mora da ceka, ovolika kolicina neiskoriscenosti je neprihvatljiva
 
 Resenje ovog problema: 
-      -u OM treba ucitati vise procesa i izvrsavati ih uporedo: dok jedan proces ceka na zavrsetak I/O operacija, CPU(procesor) moze da izvrsava instrukcije nekog drugog procesa koji je ucitan u OM => sistem postaje MULTIPROCESNI. Ovim smo dobili da se CPU vremenski multipleksira izmedju razlicitih procesa: ovo se naziva MULTIPROGRAMIRANJE (CPU u jednom momentu izvrsava instrukcije jednog procesa a u drugom trenutku izvrsava instrukcije drugog procesa...)
-      -Kada jedan proces zatrazi I/O operaciju=>OS obezbedjuje da CPU predje na izvrsavanje nekog drugog procesa.
-      -glavni dakle uslov za sprovodjenje ovog vida resenja jeste:
+      -u OM treba ucitati vise procesa i izvrsavati ih uporedo: dok jedan proces ceka na zavrsetak I/O operacija, CPU(procesor) moze da izvrsava instrukcije nekog drugog procesa koji je ucitan u OM => sistem postaje MULTIPROCESNI. Ovim smo dobili da se CPU vremenski multipleksira izmedju razlicitih procesa: ovo se naziva MULTIPROGRAMIRANJE (CPU u jednom momentu izvrsava instrukcije jednog procesa a u drugom trenutku izvrsava instrukcije drugog procesa...)  
+      -Kada jedan proces zatrazi I/O operaciju=>OS obezbedjuje da CPU predje na izvrsavanje nekog drugog procesa.  
+      -glavni dakle uslov za sprovodjenje ovog vida resenja jeste:  
       1) procesor moze da izvrsava samo one instrukcije koje se nalaze u OM, dakle u memoriji mora biti ucitano vise PROCESA
-      Upravo zbog ovog uslova uvodi se korisceje **magnetnih diskova** umesto mag traka. Magnetni diskovi omogucavaju da OS moze pristupiti podacima sa diska direktno i u proizvoljnom redosledu bez obzira na to gde su ti podaci smesteni. Magnetni disk je blokovski orijentisan I/O uredjaj, podaci se mogu upisivati na disk i kupiti sa diska, podaci se prenose iskljucivo u blokovima velicine po 512B=> OS sada odlucuje koje ce procese izvrsavati na osnovu zauzeca CPU i OM, NE samo na osnovu redosleda kojim su poslovi podneti.
-      -CPU je ovim mnogo bolje iskoriscen; stepen iskoriscenosti CPU raste sa porastom stepena multiprogramiranja
+      Upravo zbog ovog uslova uvodi se korisceje **magnetnih diskova** umesto mag traka. Magnetni diskovi omogucavaju da OS moze pristupiti podacima sa diska direktno i u proizvoljnom redosledu bez obzira na to gde su ti podaci smesteni. Magnetni disk je blokovski orijentisan I/O uredjaj, podaci se mogu upisivati na disk i kupiti sa diska, podaci se prenose iskljucivo u blokovima velicine po 512B=> OS sada odlucuje koje ce procese izvrsavati na osnovu zauzeca CPU i OM, NE samo na osnovu redosleda kojim su poslovi podneti.  
+      -CPU je ovim mnogo bolje iskoriscen; stepen iskoriscenosti CPU raste sa porastom stepena multiprogramiranja  
+      -ukupna **propusnost sistema** tj kolicina obavljenih procesa u jedinici vremena je sada mnogo veca nego za monoprocesni sistem  
+
+Nove odgvoornosti multiprocesnog OS-a:  
+      -Rasporedjivanje poslova (engl. job scheduling):  
+            OS bira koje procese ce pokrenuti iz skupa poslova podnetih za izvrsavanje (engl. submitted)  
+      -Promena konteksta (engl. context switch):
+            OS obezbedjuje da se procesor sa izvrsavanja jednog procesa prebaci na izvrsavanje drugog, ali tako da moze da se lepo prebaci na ponovno izvrsavanje prethodnog procesa kao da nije bio prekinut
+      -Rasporedjivanje procesa na procesoru: (engl. process/processor scheduling)
+            OS bira koji proces ce dobiti CPU iz skupa procesa koji mogu da nastave izvrsavanje
+            
+
       
 
 
