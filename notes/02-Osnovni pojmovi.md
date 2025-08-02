@@ -123,7 +123,7 @@ Izvrsavanje 2 interaktivna procesa BEZ preotimanja:
 
       P1: ||||||||||||||||////////  
       P2: ///.............||||////  
-             ^                ^tu se tek desila reakcija sistema(ispis)
+             ^                ^tu se tek zavrsila reakcija sistema(ispis)
              tu se desila akcija korisnika(taster)
        Vreme odziva:        ... i ||| do ^
        CPU nalet:           |||
