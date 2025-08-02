@@ -179,7 +179,18 @@ Svaki korisnik ima utisak kao da sam radi za racunarom.
 
 ### FAJL  
 Fajl je univerzalan, jednobrazan, apstraktan logicki koncept za smestanje podataka i programa na najrazlicitijim uredjajima.  
-Korisniku je omogucen pristup fajlovima bez obzira na to gde su fajlovi smesteni 
+Korisniku je omogucen pristup fajlovima bez obzira na to gde su fajlovi smesteni: disk racunara, spoljasnjem disku, na udaljenom racunaru koji je povezan lokalnom mrezom, Internet..  
+Radi bolje organizacije fajlovi se organizuju u **direktorijume** (engl. directories)
+#### Mehanizam redirekcije
+OS moze da preusmeri ulaz/izlaz u tekstualni fajl a da to sam proces ne zna.  
+Redirekcija se zadaje u komandnoj liniji sa: > i <  
+izlaz komande ls se ispisuje u tekstualni fajl:  
+ls -al > file.txt
+#### Mehanizam cevovoda (engl. pipe)
+Izlaz jednog procesa preusmerava se na ulaz drugog procesa.  
+Oznacava se sa: |  
+cat file.txt | less
+
 
 
 
