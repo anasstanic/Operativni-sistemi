@@ -118,7 +118,7 @@ Kada komanda zahteva pokretanje novog procesa nad nekim programom, interpreter k
 3) echo  
    Odziv racunara pri koriscenju interpretera komandi preko terminala je vazan. Racunar mora na nekakvu akciju korisnika (enter na primer) da da neki signal da je tu komandu prihvatio. Ovaj odziv treba da bude brz. Ovo nije efekat hardverske veze monitora i tastature, vec CLI mora da ucita znak sa tastature sistemskim pozivom, da obradi taj znak i ukoliko treba da ga ispise na ekran takodje sistemskim pozivom
 ### PREOTIMANJE I RASPODELA VREMENA
-
+#### Preotimanje
 Izvrsavanje 2 interaktivna procesa BEZ preotimanja:  
 
       P1: ||||||||||||||||////////  
@@ -140,11 +140,46 @@ Ovo se naizva i: **PREOTIMANJE PROCESORA**
        P2: /// ||||/////////////////  
               ^            
               tu se desila akcija korisnika(taster) I ubrzo je preotimanjem sistem brzo reagovao sto je dovelo do KRACEG VREMENA ODZIVA!!!
-       Vreme odziva:        ...
+       Vreme odziva:        ... i ||| do ^
        CPU nalet:           |||
        Cekanje na akciju:   ///
       
 Ovo se postize tako sto **kernel** vrsi promenu konteksta i preusmeri procesor na ivrsenje procesa koji treba da isporuci odziv i koji je iz tog razloga hitniji za samo izvrsavanje.
+
+#### Raspodela vremena (dodatak na preotimanje)
+
+Izvrsavanje 3 interaktivna procesa BEZ raspodele vremena:  
+
+      P1: ////||||||//////////////////
+      P2: ////.....||||||/////////////
+      P3: ////..........||||||////////
+             ^                ^tu se tek zavrsila reakcija sistema(ispis)
+             tu se desila akcija korisnika(taster)
+       Vreme odziva:        ... i ||| do ^
+       CPU nalet:           |||
+       Cekanje na akciju:   ///
+       
+->Vidimo da je vreme odziva predugo za P3, kao i da je za P2 vreme odziva dosta duze nego za P1; sto dovodi do neudobnosti u radu korisnika. 
+Ova neudobronst raste sa brojem procesa.
+
+---
+Izvrsavanje 3 interaktivna procesa SA raspodelom vremena:  
+
+      P1: ///||   ||   ||///////////
+      P2: ///  ||   ||//////////////
+      P3: ///   ||    ||////////////
+      
+       Vreme odziva:        od / do / (izmedju je | i praznina)
+       CPU nalet:           |||
+       Cekanje na akciju:   ///
+      
+Kada se proces aktivira i OS mu dodeli procesor, sistem ne dozvoljava procesu da se izvrsava do kraja naleta CPU, vec mu je procesor dodeljen na neko odredjeno vreme ms-**vremenski odsecak** (engl. time slice). Kada ovo vreme istekne OS procesu preotima procesor, vrsi promenu konteksta i porcesor predaje drugom procesu koji ce takodje imati ograniceno vreme izvrsavanja.  
+Sada procesi imaju razlicita vremena odziva ali vazno je da su ta vremena ravnomerna.  
+Svaki korisnik ima utisak kao da sam radi za racunarom.  
+
+### FAJL  
+Fajl je univerzalan, jednobrazan, apstraktan logicki koncept za smestanje podataka i programa na najrazlicitijim uredjajima.  
+Korisniku je omogucen pristup fajlovima bez obzira na to gde su fajlovi smesteni 
 
 
 
