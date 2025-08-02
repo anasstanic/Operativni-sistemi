@@ -107,7 +107,7 @@ Komande koje se zadaju na konzoli mogu biti sistemske (ispis sadrzaja tekuceg di
 OS izvrsava po jedan proces nad istim programom tj nad interpreterom komandne linije (CLI), po jedan proces za svaki terminal tj za svakog prijavljenog korisnika. Ovaj proces koristi konzolu i kao ulazni (sa nje cita znakove koje interpretira kao komandu sa argumentima) i kao izlazni uredjaj(ispis efekata komande)  
 
 #### Mehanizmi u operativnim sistemima
-Kada komanda zahteva pokretanje novog procesa nad nekim programom, interpreter komandne linije (CLI) kao roditeljski (engl. parent) proces stvara novi dete (engl. child) proces nad zadatim programom. CLI se kao proces roditelj suspenduje tj zustavlja izvrsavanje dok se pokrenuti dete proces ne zavrsi, tj dok pokrenuti proces dete ili zahtevana komanda ne zavrsi svoje izvrsavanje i ne vrati kontrolu roditeljskom procesu   
+Kada komanda zahteva pokretanje novog procesa nad nekim programom, interpreter komandne linije (CLI) kao roditeljski (engl. parent) proces stvara novi dete (engl. child) proces nad zadatim programom. CLI se kao proces roditelj suspenduje tj zustavlja izvrsavanje dok se pokrenuti dete proces ne zavrsi, tj dok pokrenuti proces dete ili zahtevana komanda ne zavrsi svoje izvrsavanje i ne vrati kontrolu roditeljskom procesu
 1) Rukovanje procesima decom i konzolama
    OS treba da rukuje mnostvom konzola i procesa koji izvrsavaju isti program CLI, tako da svaki porces od tih procesa moze da koristi bas svoju konzolu kao ulazno izlazni uredjaj. OS uvodi **standardni ulaz i standardni izlaz** koji je pridruzen svakom procesu. Da bi proces dete mogao biti interaktivan tj da prima i ispisuje znake na istu konzolu sa koje je i pokrenut, nasledjuje standardni ulaz i izlaz od svog roditelja.  
 
