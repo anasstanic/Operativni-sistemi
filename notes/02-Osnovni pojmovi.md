@@ -42,14 +42,17 @@
       nije bio povezan sa racunarom  
       tekst programa ili podaci su se unosili tastaturom u busac kartica koji je sluzio za binarno kodovanje unete znakove busenjem kartica  
       za 1 uneti red busac kartica je pravio 1 karticu  
-      spil izbusenih kartica za 1 program i njegove ulazne podatke ILI za paket vise takvih programa se ubacivao u **citac busenih kartica**; ovaj uredjaj je pomocu svetlosti i rupica od binarnog zapisa stvarao elektronski zapis i ucitavao u racunar  
+      spil izbusenih kartica za 1 program i njegove ulazne podatke ILI za paket vise takvih programa se ubacivao u **citac busenih kartica**; ovaj uredjaj je pomocu svetlosti i rupica od binarnog zapisa stvarao elektronski zapis i ucitavao u racunar
+      
 -izlazni uredjaj je bio linijski stampac (engl. line printer)  
       stampao je sekvencijalno znak po znak redom kojim ih racunar salje na taj uredjaj  
       imao je valjak neprekidne trake na koji je ispisivao izlaz
       tackicama je iscrtavao znak, matrica 8x8
       CR (engl. carriage return) vraca glavu na pocetak reda
       LF (engl. line feed) daje komandu da valjak pomeri papir za jedan red dalje kako bi se preslo u novi red
+      
 -kasnije su uvedene magnetne trake (engl. magnetic tape) za snimanje ili ucitavanje programa i podataka, pri cemu je pristup snimljenom sadrzaju sekvencijalan, po redosledu odredjenom kretanjem trake.
+
 -postupak:  
       termin posao (engl. job) je tada znacavao napisani program sa svojim ulaznim podacima. Taj posao, podnet na izvrsavanje, se smestao na ulazni uredjaj(citac kartica kasnije magnetna traka) i cekao da bude pokrenut. OS (tada je imao naziv monitor) je imao zadatak da sa ulaznog uredjaja u memoriju ucita posao koji je sledeci na redu i pokrene njegovo izvrsavanje. U operativnoj memeoriji se nalaze samo OS i taj posao koji se trenutno izvrsava. OS je trebao da obezbedi ulazno-izlazne operacije: ucitavanje i ispis podataka ovo se izvrsavalo sekvencijalno.  
       ponasanje ovakvog programa moze se opisati kao **ciklicno tj naizmenicno smenjivanje 2 faze**  
@@ -73,21 +76,30 @@
 
 ### Nove odgvoornosti multiprocesnog OS-a:  
 -**Rasporedjivanje poslova (engl. job scheduling):**  
-            OS bira koje procese ce pokrenuti iz skupa poslova podnetih za izvrsavanje (engl. submitted)  
+            OS bira koje procese ce pokrenuti iz skupa poslova podnetih za izvrsavanje (engl. submitted)
+            
 -**Promena konteksta (engl. context switch):**  
             OS obezbedjuje da se procesor sa izvrsavanja jednog procesa prebaci na izvrsavanje drugog, ali tako da moze da se lepo prebaci na ponovno izvrsavanje prethodnog procesa kao da nije bio prekinut  
+            
 -**Rasporedjivanje procesa na procesoru (engl. process/processor scheduling):**  
             OS bira koji proces ce dobiti CPU iz skupa procesa koji mogu da nastave izvrsavanje  
+            
 -**Preotimanje procesora (engl. preemption):**  
             Treba zastititi sistem od situacije u kojoj neki proces nikada ne izvrsi sistemski poziv, preotme mu se procesor i problem je resen  
+            
 -**Problem adresiranja memorije:**    
             Omoguciti da svaki proces **adresira svoje insturukcije i podatke u OM** bez obzira na to sto se ne zna na kojoj adresi ce biti smestene instrukcije procesa prilikom ucitavanja u memoriju  
+            
 -**Upravljanje memorijom (engl. memory management)**:  
             OS mora smestiti procese u OM, rukovati slobodnim i zauzetim delovima memorije  
+            
 -**Rasporedjivanje operacija na uredjajima (engl.device scheduling)**:  
             OS opsluzuje zahteve za prekid za koriscenje i/o uredjaja na neki specifican nacin  
+            
 -**Zastita (engl. protection):**  
             Zastititi delove memorije koji pripadaju kernelu i procesima od uticaja drugih porcesa ili lose namere  
+
+
       
             
             
