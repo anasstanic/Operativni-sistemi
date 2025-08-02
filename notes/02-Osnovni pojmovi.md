@@ -76,7 +76,7 @@
 
 ### Nove odgvoornosti multiprocesnog OS-a:  
 -**Rasporedjivanje poslova (engl. job scheduling):**  
-            OS bira koje procese ce pokrenuti iz skupa poslova podnetih za izvrsavanje (engl. submitted)
+            OS bira koje procese ce pokrenuti iz skupa poslova podnetih za izvrsavanje (engl. submitted); ovo danas NIJE U IMPLEMENTACIJI
             
 -**Promena konteksta (engl. context switch):**  
             OS obezbedjuje da se procesor sa izvrsavanja jednog procesa prebaci na izvrsavanje drugog, ali tako da moze da se lepo prebaci na ponovno izvrsavanje prethodnog procesa kao da nije bio prekinut  
@@ -104,6 +104,22 @@ Mainframe racunari pojavljuju se 1070. i koriste se do 90ih.
 Sastojali su se od CPU, OM, I/O uredjaja (diskovi, stampaci magnetne trake..) + terminal tj konzola. Upravo ovo ih izdvaja od dosadasnjih racunara (pre 1970)  
 Konzola se sastojala iz monitora i tastature. Tastatura je ulazni uredjaj principijelno isti danasnjoj verziji. Monitori su sekvencijalni izlazni uredjaji, ponasa se isto kao i linijski stampac.  
 Na svakoj konzoli (terminalu) moze da radi jedan korisnik koji se prethodno logovao (engl. log in) pomocu korisnickog imena i lozinke; potom zadaje komande pomocu interpretera komandne linije (engl. CLI)  
+Komande koje se zadaju na konzoli mogu biti sistemske (ispis sadrzaja tekuceg direktorijuma) ili pokretanje nekog procesa  
+OS izvrsava po jedan proces nad istim programom tj nad interpreterom komandne linije (CLI), po jedan proces za svaki terminal tj za svakog prijavljenog korisnika. Ovaj proces koristi konzolu i kao ulazni (sa nje cita znakove koje interpretira kao komandu sa argumentima) i kao izlazni uredjaj(ispis efekata komande)  
+#### Mehanizmi u operativnim sistemima
+
+Kada komanda zahteva pokretanje novog procesa nad nekim programom, interpreter komandne linije (CLI) kao roditeljski (engl. parent) proces stvara novi dete (engl. child) proces nad zadatim programom. CLI se kao proces roditelj suspenduje tj zustavlja izvrsavanje dok se pokrenuti dete proces ne zavrsi, tj dok pokrenuti proces dete ili zahtevana komanda ne zavrsi svoje izvrsavanje i ne vrati kontrolu roditeljskom procesu 
+
+1) Rukovanje procesima decom i konzolama
+   OS treba da rukuje mnostvom konzola i procesa koji izvrsavaju isti program CLI, tako da svaki porces od tih procesa moze da koristi bas svoju konzolu kao ulazno izlazni uredjaj. OS uvodi **standardni ulaz i standardni izlaz** koji je pridruzen svakom procesu. Da bi proces dete mogao biti interaktivan tj da prima i ispisuje znake na istu konzolu sa koje je i pokrenut, nasledjuje standardni ulaz i izlaz od svog roditelja.  
+
+2) Mehanizam prenosa argumenata komandne linije do procesa deteta  
+   Proces dete ove argumente dobija sistemskim pozivom.  
+   U C jeziku ovi argumenti se vide kao argumenti funkcije main (argc i argv)  
+   Programi koji ovako interaguju sa korisnicima se nazivaju konzolni programi ili aplikacije (engl. console application)
+3) echo
+   Odziv racunara pri koriscenju interpretera komandi preko terminala je vazan. Racunar mora na nekakvu akciju korisnika (enter na primer) da da neki signal da je tu komandu prihvatio. Ovaj odziv treba da bude brz. Ovo nije efekat hardverske veze monitora i tastature, vec CLI mora da ucita znak sa tastature sistemskim pozivom, da obradi taj znak i ukoliko treba da ga ispise na ekran takodje sistemskim pozivom
+
 
 
 
