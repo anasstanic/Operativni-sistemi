@@ -140,7 +140,7 @@ Kada komanda zahteva pokretanje novog procesa nad nekim programom, interpreter k
        Vreme odziva:        ...
        CPU nalet:           |||
        Cekanje na akciju:   ///
-      Ovo se postize tako sto **kernel** vrsi promenu konteksta i preusmeri procesor na ivrsenje procesa koji treba da isporuci odziv i koji je iz tog razloga hitniji za samo izvrsavanje.
+Ovo se postize tako sto **kernel** vrsi promenu konteksta i preusmeri procesor na ivrsenje procesa koji treba da isporuci odziv i koji je iz tog razloga hitniji za samo izvrsavanje.
 
 
 
