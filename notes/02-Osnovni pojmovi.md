@@ -119,7 +119,8 @@ Kada komanda zahteva pokretanje novog procesa nad nekim programom, interpreter k
    Odziv racunara pri koriscenju interpretera komandi preko terminala je vazan. Racunar mora na nekakvu akciju korisnika (enter na primer) da da neki signal da je tu komandu prihvatio. Ovaj odziv treba da bude brz. Ovo nije efekat hardverske veze monitora i tastature, vec CLI mora da ucita znak sa tastature sistemskim pozivom, da obradi taj znak i ukoliko treba da ga ispise na ekran takodje sistemskim pozivom
 ### PREOTIMANJE I RASPODELA VREMENA
 
-     Izvrsavanje 2 interaktivna procesa BEZ preotimanja:  
+Izvrsavanje 2 interaktivna procesa BEZ preotimanja:  
+
       P1: ||||||||||||||||////////  
       P2: ///.............||||////  
              ^                ^tu se tek desila reakcija sistema(ispis)
@@ -127,17 +128,18 @@ Kada komanda zahteva pokretanje novog procesa nad nekim programom, interpreter k
        Vreme odziva:        ... i ||| do ^
        CPU nalet:           |||
        Cekanje na akciju:   ///
-      ->Vidimo da je vreme odziva predugo sto dovodi do neudobnosti u radu korisnika. Zasto? Zato sto dok procesor izvrsava neki proces, on ze       to raditi sve dok ne zavrsi taj zapoceti CPU nalet, ukoliko se pre zavrsetka tog CPU naleta desi akcija korisnika za neki drugi proces,       promena konteksta se nece desiti sve dok se CPU nalet prvopokrenutog procesa ne zavrsi, pa ukoliko taj nalet duze traje korisnik ce duze       i cekati reakciju sistema.
+       
+->Vidimo da je vreme odziva predugo sto dovodi do neudobnosti u radu korisnika. Zasto? Zato sto dok procesor izvrsava neki proces, on ze       to raditi sve dok ne zavrsi taj zapoceti CPU nalet, ukoliko se pre zavrsetka tog CPU naleta desi akcija korisnika za neki drugi proces,       promena konteksta se nece desiti sve dok se CPU nalet prvopokrenutog procesa ne zavrsi, pa ukoliko taj nalet duze traje korisnik ce duze       i cekati reakciju sistema.
 
 ---
-Izvrsavanje 2 interaktivna procesa SA preotimanjem:
+Izvrsavanje 2 interaktivna procesa SA preotimanjem:  
 Ovo se naziva: **MEHANIZAM PREKIDA** (engl. interrput): PREKIDA SE TEKUCE IZVRSAVANJE I PRELAZI SE NA KOD KERNELA   
-Ovo se naizva i: **PREOTIMANJE PROCESORA**
+Ovo se naizva i: **PREOTIMANJE PROCESORA**  
 
        P1: |||PREOTIMANJE|||||||||//  
        P2: /// ||||/////////////////  
-                 ^            
-                 tu se desila akcija korisnika(taster) I ubrzo je preotimanjem sistem brzo reagovao sto je dovelo do KRACEG VREMENA ODZIVA!!!
+              ^            
+              tu se desila akcija korisnika(taster) I ubrzo je preotimanjem sistem brzo reagovao sto je dovelo do KRACEG VREMENA ODZIVA!!!
        Vreme odziva:        ...
        CPU nalet:           |||
        Cekanje na akciju:   ///
