@@ -25,7 +25,19 @@
      -Nacini na koje klijent interaguje sa OS-om racunara servera: **MALO PRESKOCENO**
        -SSH protokol;sigurna skoljka (engl. secure shell): ovo je protokol za kriptovanu komunikaciju.
        -upomocu udaljenje radne povrsine (engl. remote desktop )
+     
 ## Personalni racunari
+(engl. personal computer, PC)  
+Racunar za licnu upotrebu, stoni racunar, prenosivi laptop, tablet, pametni telefon...
+
 ## Serverski sistemi
+Racunar namenjen za opsluzivanje zahteva koji stizu komunikacionim protokolima preko racunarske mreze sa velikog broja udaljenih klijent racunara  
+Da bi uspesno opsluzivao sve te zahteve:
+-ima vise procesora OPSTE namene 8,16.. kao i odgovarajuce koprocesore
+-ima veliku OM128,256,512GB ili 1TB
+-vise diskova na posebnim uredjajima, skladistima velikog ukupnog kapaciteta
+-mreznu vezu visoke propusnosti
+
 ## Sistemi u oblaku
+
 ## Ugradjeni sistemi i sistemi za rad u realnom vremenu
