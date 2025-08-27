@@ -1,10 +1,10 @@
 # Vrste racunarskih i operativnih sistema
 
 ## Multiprocesorski i distribuirani sistemi
-  Postoje 2 osnovne paradigme hardverske arhitekture rscunarskih sistema koji omogucavaju izvrsavanje programa na vise procesora:
+  Postoje 2 osnovne paradigme hardverske arhitekture racunarskih sistema koji omogucavaju izvrsavanje programa na vise procesora:
   1) Multiprocesorski sistem:  
-     -racunarski sistem sa vise procesora koji dele zajednicku OM-takva je vecina danasnjih racunara  
-     -procesori mogu pristupati toj deljenoj memoriji, u nju smestati podatke i citati iz nje  
+     -racunarski sistem sa vise procesora koji dele zajednicku OM (engl. shared memory)- takva je vecina danasnjih racunara  
+     -procesori mogu pristupati toj deljenoj memoriji, u nju smestati podatke i citati iz nje, preko zajednicke magistrale na koju su svi povezani
      -procesorsko jezgro i procesorske niti su hardverski elementi unutar procesora i omogucavaju uporedo izvrsavanje instrukcija vise procesa  
      -Podela multiprocesorskih sistema:  
        -simetrican sistem: svi procesori su opste namene, jednaki su i imaju isto vreme pristupa OM  
@@ -13,7 +13,7 @@
        -simetrican:sve procesore tretira na isti nacin, svi oni **mogu izvrsavati kod procesa i kod kernela**  
        -asimetrican:1 procesor je gazada(engl. master) i on rasporedjuje procese na druge procesore i izvrsava kod kernelea za ostale sistemske usluge; Ostali procesori su robovi i izvrsavaju samo kod korisnickih procesa koje im master dodeli  
      -OS DODATNO MORA DA RASPOREDJUJE PROCESE NA PROCESORE kako bi ih efikasno koristio
-  3) Distribuiran sistem:  
+  2) Distribuiran sistem:  
      -sistem sa vise procesora koji **NEMAJU** zajednicku OM, vec **svaki procesor ima svoju OM**  
      -procesori su povezani **komunikacionom mrezom** preko koje mogu razmenjivati poruke
      -Podela:
