@@ -148,9 +148,24 @@ pored simbolickih masinskih instrukcija, moze sadrzati i **direktive** to je lin
                 **sve ovo sa ovim primerima kodova pogledati u knjizi**  
 
 ### ADRESIRANJE PODATAKA  
--definise postupak kojim se dolazi do mesta na kojem se nalazi operand instrukcije ili na koji se upisuje rezultat instrukcije
+
+-definise postupak kojim se dolazi do mesta na kojem se nalazi operand instrukcije ili na koji se upisuje rezultat instrukcije  
 -da bi masinske instrukcije pristupale podacima, moraju imati odredjene nacine adresiranja(engl. address mode)  
--arhitektura procesora da bi podrzala odgovarajuce kontrukte potrebne u programiranju, ona mora podrzati odredjene nacine adresiranja
+-arhitektura procesora da bi podrzala odgovarajuce kontrukte potrebne u programiranju, ona mora podrzati odredjene nacine adresiranja  
+**neposredno adresiranje**  
+-engl. immediate address mode  
+-operand je binarni sadrzaj u odgovarajucem polju same instrukcije  
+#constant_expression  
+load r1, #1 npr  
+**registrarsko direktno**  
+-vazno je da postoji u load/store procesorima jer se time omogucava da se iz memorije vrednosti dovuku u registre i onda nad njima vrse neke operacije  
+-operand se nalazi u registru koji je zadat odgovarajucim polje instrukcije  
+**registarsko indirektno**  
+-koristi se kada se podatku pristupa preko pokazivaca  
+-vrednost registra je zadata u odgovarajucem polju instrukcije; u tom registru nalazi se vrednost adrese na kojoj se nalazi podatak  
+load r1 , [ r0]
+
+
 ### ADRESIRANJE INSTRUKCIJA
 ### PREVODJENJE
 ### POVEZIVANJE
