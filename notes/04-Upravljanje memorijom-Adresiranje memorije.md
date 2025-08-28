@@ -74,6 +74,102 @@ R0,R1,R2 su programski dostupni registri, R0 je odredisni; R1 i R2 su izvorisni
    vrste skokova:
      uslovni: najcesce je uslov indikator iz PSW ili nekog registra zadatog u instrukciji
      bezuslovni: jmp 0xff12456
+
+### OPERATIVNA MEMORIJA        
+-je linearno uredjen skup celija tj lokacija sa pridruzenim adresama(celim brojevima) iz skupa od 0 do 2^n-1        
+-n-sirina adrese u b, tj sirina adresne magistrale, najcesce 32b ili 64b, negde postojalo 16,20...        
+-svaka celija cuva binarni sadrzaj iste sirine u bitima        
+-OM ima velik kapacitet (10tine ili 100tine GB ili nekoliko TB) ali i znacajno duze vreme odziva        
+-procesor pristupa OM u **ciklusima citanja ili upisa**  (engl. read/write memory cycle); zadajuci adresu, podatak i tip operacije(Rd/Wr) **str 55**     
+-obezbedjuje direktan pristup lokacijama, u bilo kojem poretku za redom         
+-**adresibilna jedinica (engl. addressible unit)** sirina (u bitima) najmanje jedinice koja ima svoju adresu, **1B najcesce**. U zavisnosti od implementacije memorije i sirine magistrale podataka, u jednom ciklusu mogu se preneti 1 ili vise susednih adresibilnih jedinica.        
+-**fizicki adresni prostor(engl. physical address space)** skup svih adresa koje se mogu zadati na adresnoj magistrali, skup adresa u opsegu od 0 do 2^n-1, DAKLE NJEGOVA VELICINA JE **2^n B**
+-**Instalirana fizicka memorija** je podskup fizickog adr prostora, za koji postoje instalirani memorijski moduli (cipovi) ali hardverski elementi koji se mogu adresirati        
+-manja je od fizicke memorije: 4GB, 8GB, 16GB, 256GB, 512GB, 1TB        
+--FIZICKI ADRESNI RPOSTOR MOZE BITI POKRIVEN RAZLICITIM TIPOVIMA FIZICKE MEMORIJE--
+1.**nepostojani tj dinamicki RAM tj DRAM: Dynamic Random Access Memory**        
+-brza memorija sa mogucnosti citanja i upisa        
+-gubi sadrzaj gubitkom napajanja        
+-u nju se smestaju kernel i procesi tj njihove instrukcije i podaci         
+2.**postojani RAM memorija Random Access Memory**        
+-sporija od DRAM, sa mogucnoscu citanja i upisa
+-NE gubi sadrzaj prilikom napajanja jer ima bateriju ili je izradjena u tehnologiji fles memorije        
+-za smestanje sistemskih parametara konfiguracije racunara, npr info o tome koji disk sluzi za podizanje operativnog sistema(boot isk)         
+3.**ROM Read Only Memory je perzistentna memorija**        
+-nema mogucnost upisa, iz nje se moze samo citati, u nju se upisalo tokom proizvodnje        
+-sluzi za smestanje:        
+        a)**programa za podizanje sistema (engl. bootstrap program):**         
+        -smesta se od:        
+                fiksne adrese unapred def za dati procesor
+                ILI
+                adrese upisane na fiksnoj i unapred defr lokaciji u fizickom adresnom prostoru, koja sadrzi **reset pointer**        
+        od te adrese od koje se smesta, procesor pocinje dohvatanje i izvrsavanje instrukcija po svom ukljucivanju: kad pocinje izvrsavanje instrukcija procesor postavlja PC na tu vrednost   
+        -uloga u je da vrsi **podizanje sistema (engl.booting)** sa boot diska ucita u memoriju sadrzaj sa unapred definisanog mesta, najcesce blok 0-u kome se nalazi veci bootstrap program, koji dalje sa tog diska ucitava kernel operativnog sistema inicijalizuje ga i stavlja u funkciju, tj pokrece njegovo izvrsavanje        
+        b)**BIOS (engl. Basic Input/Output System)**        
+        -skup fiksnih, predefinisanih, ugradjenih procedura koje obavljaju osnovne operacije sa u/i hardverskim uredjajima koji su uvek prisutni u racunaru. One procedure OS koristi za implementaciju svojih usluga.        
+4.**Memorijski preslikani u/i uredjaji (engl. Memory mapped I/O)**         
+  su razliciti u/i uredjaji tj njihovi interfejsi-registri ili mem moduli (npr graficke kartice). Oni se koriste isto kao i celije memorije: procesor  moze izvrsavati cikluse citanja/upisa na lokacije na adresama na koje su oni vezani tj na koje se oni odazivaju. Efekti operacija zavise od implementacije samih elemenata.        
+**Mapa fizicke memorije (engl. Memory map)**        
+   -definisana je arhitekturom racunara
+   -predstavlja raspored opsega memorijskih adresa na kojima mogu biti instalirani memorijski moduli i hardverski elementi  
+   -**knjiga strana 58,59 objasnjenje slike i slika**  
    
-    
-    
+### ASEMBLER  
+-isti termin asembler se koristi za simbolicki masinski jezik tako da ne brkas sa terminom koji oznacava prevodilac programa napisanih na tom programu  
+-engl. Assembly  
+-radi sledece: simbolicki masinski jezik=>binarni zapis masinskih instrukcija i podataka  
+-prevodi jednu po jednu liniju iz ulaznog fajla, izracunava **tekucu adresu** za tu liniju; pocinje od neke unapred definisane adrese koja moze biti 0 ili neka druga vrednost..  
+-ukoliko linija sadrzi instrukciju i asembler prepoznaje mnemonik instrukcije:  
+        generise binarni kod za tu instrukciju, uzimajuci u obzir operande, ponekad koristi i vrednost tekuce adrese  
+        uvecava vrednost tekuce adrese za velicinu binarnog zapisa prevedene instrukcije  
+**strana 60,61 objasnjenje asemblerskog koda**  
+pored simbolickih masinskih instrukcija, moze sadrzati i **direktive** to je linija asemblerskog teksta koja ne sadrzi instrukciju, vec neku specifikaciju ili uputstvo asembleru
+        **direktive:**  
+                **DEF** definise simbolicku konstantu u asemblerskom programu  
+                simbolickoj konstanti se dodeljuje vrednost konstantnog izraza navedenog u direktivi  
+                postize se efekat takav da, gdegod se u kodu pojavi oznaka simbolicke konstante, efekat je isti kao da se naislo na vrednost koju ova konstanta predstavlja, plus pri proveri vrednosti dovoljno je da se promeni samo u def direktivi a u ostatku koda ne treba promena.  
+                asembler ubacuje simbol u internih tabelu svojih definisanih simbola
+                    **direktiva DEF u picoRISC:**  
+                    symbol_name DEF constant_expression ;comment
+                **ORG** eksplicitno podesava tekucu adresu linije, postavlja vrednost simnbola $ na novu **zadatu** velicinu  
+                   **direktiva ORG na picoRISC**
+                   ORG constant_expression ;comment  
+                **START** oznacava adresu pocetne instrukcije programa  
+                ovu info, koja je na odredjeni nacin zapisana u izlaznom fajlu koristi OS **kada pokrece proces nad ovim programom**  
+                   **direktiva START na picoRISC**
+                   START constant_expression ;comment        
+                **db, dd, dw direktive**  
+                npr:  
+                hello: db 'H', 'e', 'l', 'l','o' '\n' ;alocira prostor od 6B, u svaki B ubacuje odredjeni simbol, a adresi gde je simvol H dodeljuje labelu hello
+                p: dd 0 ;odvaja prostor za dvostruku rec (4B) i inicijalizuje je na 0
+                lookup: dw (16 dup 0)  ;odvaja prostor za 16 reci sirine 2B i sve ih inicijalizuje nulama 0; 16 dup 0: znaci 16 puta inicijalizuj adresu vrednoscu 0
+        **labela** je simbol pridruzen jednoj liniji asemblerskog programa  
+        svakoj labeli na koju naidje asembler dodeljuje vrednost (u svojoj internoj tabeli simbola) tekuce adrese te linije labele($)  
+                **sve ovo sa ovim primerima kodova pogledati u knjizi**  
+
+### ADRESIRANJE PODATAKA  
+-definise postupak kojim se dolazi do mesta na kojem se nalazi operand instrukcije ili na koji se upisuje rezultat instrukcije
+-da bi masinske instrukcije pristupale podacima, moraju imati odredjene nacine adresiranja(engl. address mode)  
+-arhitektura procesora da bi podrzala odgovarajuce kontrukte potrebne u programiranju, ona mora podrzati odredjene nacine adresiranja
+### ADRESIRANJE INSTRUKCIJA
+### PREVODJENJE
+### POVEZIVANJE
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
