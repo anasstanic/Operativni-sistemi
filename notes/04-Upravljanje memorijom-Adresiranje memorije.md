@@ -1,1 +1,79 @@
+# UPRAVLJANJE MEMORIJOM  
+## ADRESIRANJE MEMORIJE  
 
+### ARHITEKTURA PROCESORA  
+Procesor (engl. processor CPU) je centralni hardverski deo svakog racunara, jer on izvrsava program i tako obradjuje informacije.  
+**Arhitekturu procesora** cine njegov interfejs tj elementi koji su vidljivi softveru, u te elemente spada: skup instrukcija, skup programski dostupnih registara, skup podrzanih nacina adresiranja...  
+**INSTRUKCIJA**   
+-je binarni zapis, ima svoju velicinu, definise zadatak tj operaciju za procesor: citanje operanada (citanje vrednosti dostupnih procesorskih registara i/ili lokacija operativne memorije), upis rezultata u programski dostupne registre i/ili lokacije operativne memorije, ar ili log operacije nad operandima, odredjivanje mesta sledece instrukcije...  
+-nazivamo ih **masinske instrukcije**, **masinski jezik** je nacin zapisivanja masinskih instrukcija bianrnimm kodom  
+-arhitekura procesora definise format binarnog zapisa instrukcija  
+**FORMAT INSTRUKCIJE NA PROCESORU picoRISC**  
+31 30 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15 14 13 12 11 10 09 08 07 06 05 04 03 02 01 00  
+.......OP CODE......... AddrMode ......R0...... ......R1...... ......R2...... ..Type.. ne koriste se  
+        8b                 3b           5b            5b             5b          3b              
+R0,R1,R2 su programski dostupni registri, R0 je odredisni; R1 i R2 su izvorisni  
+**Simbolicki masinski jezik tj asembler:**  
+  masinska instrukcija napisana tako da je ekvivalentna binarnoj verziji, ali je simbolicka tj citljiva coveku programeru  
+  dakle: jedna ova instrukcija (simbolicka tj asemblerska) odgovara jednoj masinskoj instrukciji
+  add r0,r1,r2 ZNACI r0=r1+r2; i mozemo ga prevesti u binarni kod  
+**Nacin adresiranja** je specifikacija kako se odredjuje mesto operanda (registar ili lokacija u memoriji) tj resultata instrukcije ili adresa lokacije u memoriji na kojoj se nalazi sl instrukcija  
+**Programski dostupni registri** su registri procesora u koje instrukcija upisuje vrednosti ili iz kojih instrukcija cita vrednosti. Nema nepredvidivih akcija nad programski dostupnim registrima, to je neohodno za pravilan rad celokupnog sistema, kako on ne bi dosao u nekonzistentno stanje.  
+  **Podela programski dostupnih registara:**  
+  1. **REGISTRI POSEBNE NAMENE**  
+   njihova namena je unapred definisana  
+   najcesce se ne referenciraju eksplicitno u insturkciji, odredjene instrukcije implicitno(indirektno) podrazumevaju njihovo koriscenje u svojoj semantici; to je ono kao recimo jmp pa znas da ce da se incrementira pc, neces pisati pc++(VALJDA)  
+   PC, PSW, SP  
+  2. **REGISTRI OPSTE NAMENE**  
+     za cuvanje vrednosti koje se tumace kao podaci(operandi, rez operacija) ili adrese lokacija memorije u kojima se nalaze opet podaci ili instrukcije programa    
+   
+**Interni registri** procesor poseduje i njih, oni se koriste za implementaciju i nisu dostupni u instrukcijama. DAKLE instukicija ne moze da upisuje u njih ili cita njihove vrednosti. Oni **nisu deo arhitekture procesora** i potpuno su nevidljivi softveru.  
+
+**Podela(PODELA PO STRUKTURI-KONCEPCIJA) procesora na CISC i RISC**  
+  **CISC-Complex Instruction Set Computer**   
+    -procesori imaju slozenu arhitekturu    
+    -procesori uvode ogranicenja, pravila koriscenja registara opste namene...  
+    -registri opste namene se dele na registre za podatke i registre za adrese  
+  **RISC-Reduces Instruction Set Computer**  
+    -procesori imaju jednostavnu, pravilnu, ortogonalnu arhitekturu  
+    -nema ogranicenja u koriscenju registara opste namene (svi se mogu koristiti i za adrese i za podatke)  
+    -svi registri se mogu koristiti u svim nacinima adresiranja  
+    -najcesce imaju **load/store arhitekturu** sto znaci da ostale instrukcije rade sa vrednostima iz programski dostupnih registara  
+    -**registarski fajl** skup registara opste namene; registri se oznacavaju generickim oznakama R0,R1,R2...  
+    -zbog manjka ogranicenja, olaksane su interne tehnike poput **protocne obrade i superskalarnosti**  
+    -**staza za podatke(engl. data path)** RISC procesori u svojoj **internoj implementaciji** imaju stazu za podatke  
+    -**ALU Aritmetic-Logic Unit** je kombinaciona ili sekvencijalna mreza koja izvrsava ar ili log operaciju, rezultat operacije postavlja na svoje izlazne linije. Izlazni signali ALU-a su vezani na ulaze registara opste namene. malo preskoceno objasnjenje rada...  
+**picoRISC je procesor load/store arhitekture sa registarskim fajlom od 16 registara opste namene**  
+**klasicna FON NOJMANOVA arhitektura procesora:**    
+  procesor dohvata instrukcije iz OM i izvrsava ih jednu po jednu, uvecava se brojac PC (za velicinu dohvacene instrukcije)-njegovaq vrednost sekoristi kao adresa mem lokacije na kojoj se nalazi naredna instrukcija ili njen deo. Kod instukcije skoka, nova instrukcija definise vrednost PC-a. **Slika 4.3 strana 50, 51, 52-53 objasnjenje**  
+  **magistrala (engl. bus)** nalazi se izmedju procesora i operativne memorije: skup linija koje prenose signale  
+    1. data bus-magistrala podataka  
+      njene vrednosti definisu podatak koji se cita ili upisuje u memoriju  
+    2. adress bus-adresna magistrala  
+      njene vrednosti definisu lokaciju memorije sa kojom se vrsi zadata operacija  
+    3. control signals-upravljacke linije  
+      definisu da li se radi o load ili store operaciji  
+  **PSW (engl. program status word)** specijalizovani programski dostupan registar procesora, neki njegovi biti se postavljaju implicitno kao posledica rezultata i sluze kao indikatori statusa izvrsene operacije ili njenog rezultata. Negde se naziva i **flag registar registar zastavica**    
+  Z-Zero flag: rez op je 0  
+  C-Carry flag: doslo do prenosa ili pozajmice u ar op  
+  N-Negative flag: rez ar op je neg  
+  V-oVerflow flag: doslo do prekoracenja u ar op  
+  -instrukcije uslovnog skoka mogu koristiti proveru ovih flegova pa u zavisnosti od tih vr da se vrsi/ne vrsi skok   
+  -cmp poredi 2 vrednosti i: u Z stavlja 1 ako je rez oduzimanja 0, ili na 1 u suprotnom  
+  -jnz (jne) skace ukoliko je Z=1 (ja mislim da je ovo greska to valjda vazi za jz?)  
+  **picoRISC NE POSEDUJE psw**:  sub r3, r1, r2  
+                                 jnz r3, 0xA1  //skoci na A1 ako nije 0 u r3  
+**Skupovi instrukcija**  
+1. **ARITMETICKO LOGICKE**  
+   add,subtract,compare,multiply,divide,and,or,xor  
+   mogu raditi samo sa operandima iz registara opste namene  
+2. **INSTRUKCIJE PRENOSA PODATAKA**  
+   load-iz mem u reg, store-iz reg u mem, move-prepisivanje sa jednog na drugo mesto  
+3. **INSTRUKCIJE SKOKOVA**
+   u registar PC smestaju vrednost adrese naredne instrukcije na koju se skace ukoliko je uslov ispunjen, implicitno se uvek izvrsava instrukcija iza tekuce (ukoliko ne dolazi do vanrednosg skoka)
+   vrste skokova:
+     uslovni: najcesce je uslov indikator iz PSW ili nekog registra zadatog u instrukciji
+     bezuslovni: jmp 0xff12456
+   
+    
+    
