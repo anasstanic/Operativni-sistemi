@@ -240,19 +240,87 @@ ukoliko se adresiranje podataka odradi nepravilno, npr u niz velicine 5 ti pokus
         2.Parsiranje: prevodilac na osnovu gramatike prepoznaje vece celine(recenice), ako naidje na neki prestup=>prijavljuje gresku  
         3.Semanticka analiza: prevodilac proverava semanticka pravila za ove prepoznate vece celine, prijavljuje greske u slucaju iskakanja iz           pravila  
           -kada naidje na novu deklaraciju, prevodilac dodaje identifikator cija je ta deklaracije u strukturu zvanu **tabela simbola**-ona cuva informacije o tipu i ostalim svojstvima entiteta ciji je identifikator ubacen.  
-        4.Generisanje koda: prevodilac generise sadrzaj u prevedenom objektnom fajlu za one elemente recenica za koje je to definisano                   semantikom jezika  
+        4.Generisanje obj fajla: prevodilac generise sadrzaj u prevedenom objektnom fajlu za one elemente recenica za koje je to definisano                   semantikom jezika  
           -Objektni fajl sadrzi: **alociran prostor** za staticke objekte(podatke) i **binarni masinski kod** za masinske instrukcije potprograma(funkcija)  
 -Prevodilac kada naidje na upotrebljen identifikator:  
    -proverava da li je deklarisan tj da li je u tabeli simbola, da li je dostupan po pravilima jezika na tom mestu-ako nije prijavljuje gresku  
    -da li je upotrebljen u skladu sa pravilima jezika: f++ ne moze ako je f naziv fje  
    -zna kako da generise kod za upotrebu tog identifikatora ako je to definisano semantikom jezika  
 **definicija** : vrsta deklaracije u C/C++  
-int n=-16; je deklaracija globalnog statickog objekta koja je i definicija  
+int n=-16; je deklaracija globalnog statickog objekta koja je **i definicija**  
 -ima 1.deklarativni deo, ime, uvodi se u tabelu simbola  
-     2.inicijalizator -16 kojim se inicijalizuje objekat
+     2.inicijalizator -16 kojim se inicijalizuje objekat  
+Ovaj objekat ima staticki zivotni vek  
+postoji jedna instanca objekta za svaku definiciju; (automatski objekti za svaku definiciju dobijaju novu instancu)  =>
+        za ove staticke objekte prevodilac alocira prostor **vec tokom prevodjenja** u objektnom fajlu se odvaja ovaj prostor kao stoje gore vec receno, takodje posto je inicijalizator konstantan izraz, identifikatoru se dodoeljuje vrednost takodje vec pri prevodjenju  
+**definicija funkcije** je deklaracija koja ima i telo: prevodilac generise binarni masinski kod koji predstavlja prevod naredbi tela fuje   
+**imena tj simboli sa spoljasnjim vezivanjem** imena definisana u datom fajlu koja se-mogu koristiti u drugim c/cpp fajlovima; u zaglavlju objektnog fajla prevodilac pravi strukturu-tabelu simbola izvezenih imena iz posmatranog fajla; ta struktura za svako izvezeno ime sadrzi: ime koje se izvozi i relativnu adresu u odnosu na pocetak binarnog prevoda u koji se to ime preslikava  
+**imena koja imaju interno vezivanje (internal linking)** se ne mogu koristiti u drugim fajlovima jer prevodilac za njih ne ostavlja nikakve informacije u generisanoj tabeli sumbola u objektnom fajlu  
+**strana 82,83,84,85**  
+**asm** direktiva se moze koristiti u C/C++  
+        sluzi da se u okviru nje pise asemblerski kod
+
+### POVEZIVANJE  
+**povezivac - linker** je program koji **od skupa obj fajlova** napravi **izvrsiv program-executable exe fajl**  
+linker moze da radi u **2 rezima**: rezim se specificira navodjenjem parametra prilikom pokretanja linkera  
+1.izrada lib fajla  
+**Biblioteka-library-lib** je fajl sa .lib nastavkom imena  
+Principijelno ima isti format kao i objektni fajlovi 
+obj i lib fajlove linker tretira isto: ti mu se fajlovi stave na ulaz on gleda da ih poveze  
+obj: nastaje prevodjenjem **JEDNOG IZVORNOG FAJLA**  
+lib: nastaje povezivanjem vise obj moguce i lib fajlova <=lib fajlovi su nastali jer je neprakticno pojedinacno davati mnostvo obj fajlova na objedinjavanje  
+biblioteka izvozi simbole koje definise, moze i da ih uvozi ukoliko koristi simbole iz neke druge biblioteke  
+2.izrada exe fajla  
+        ovo radi iz 2 prolaza:  
+        1.linker analizira ulazne fajlove i pravi mapu exe fajla   
+        stvara svoju tabelu simbola tako sto sakuplja informacije iz tabela simbola ulaznih fajlova;   
+        u svoju tabelu simbola smesta sve izvezene objekte iz objektnih fajlova **za koje moze odmah da izracuna adresu u odnosu na izvrsiv fajl**  
+        2.generise binarni kod i **razresava** nerazresena adresna polja masinskih instrukcija **na osnovu informacija** o adresama u koje se preslikavaju simboli **iz njegove tabele simbola**  
+**Razlike izrade lib i exe fajlova pomocu linkera:**  
+1.**lib uvek ima zaglavlje** sa simbolima koje izvozi, **exe** fajl moze imati **drugaciji format** od lib i obj fajlova  
+2.exe sadrzi informacije koje su potrebne OSu za pokretanje programa, to nemaju obj i lib fajlovi  
+3.exe ne sme da sadrzi nerazresene simbole, lib moze da sadrzi nerazresene simbole  
+
+**main globalna funkcija u C/C++:**  
+main fja se izvrsava kao i svaka druga funkcija  
+**kod koji se prvi izvrsava** moze biti **u obj fajlu** koji se uvek podrazumevano povezuje ili ga moze **generisati prevodilac**  
+kod koji se prvi izvrsava prilikom pokretanja programa **poziva fju main**  
+ovaj kod koji se prvi izvrsava **poziva sistemski poziv za gasenje programa**  
+**Linker moze prijaviti 2 vrste gresaka:**  
+1.simbol nije definisan  
+-izostavljena je definicija  
+-obj/lib fajl nije linkovan a trebalo je  
+-neki lib fajl uvozi simbole iz lib fajla koji nije povezan
+2.simbol je definisan vise puta: **sukob imena**  
+2 izvorna fajla su definisala isto globalno ime sa eksternim vezivanjem (imena sa internim vezivanjem nisu ni vidljiva linkeru pa ne mogu da naprave sukob)  
+uzroci ove greske:  
+-sukob imena u korisnickom programu  
+-sukob imena iz korisnickog programa sa imenom koje je izvezla biblioteka  
+**prostor imena** smanjuje nastanak ovih gresaka jer generisani simbol koji linker vidi sadrzi puno ime koje ukljucuje i nazive svih ugnjezdenih prostora imena=>ukida se potreba za globalnim imenima i obeshrabruje njihova upotreba  
+
+**ELF Executable/Linkable Format** je standardan format koji se danas siroko koristi i **definise nacin zapisivanja obj,lib i exe** fajlova; ovi fajlovi su binarni, po unapred desfinisanoj strukturi koja definise sve elemente koje ovi fajlovi sadrze.  
 
 
-### POVEZIVANJE
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
 
