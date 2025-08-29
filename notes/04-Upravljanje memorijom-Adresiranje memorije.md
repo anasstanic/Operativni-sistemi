@@ -168,7 +168,29 @@ load r1, [r0]
 -vrednost podatka se nalazi u memoriji na lokaciji koja se dobija sabiranjem vrednosti adrese iz regitra sa pomerajem definisanim u instrukciji  
 -pomeraj moze biti negativan  
 -pomeraj je na 32b  
+**memorijski direktno**  
+-o tome je pricao u delu kategorije objekata po zivotnom veku
 
+**Kategorije objekata po zivotnom veku tj trajanju skladista(engl. storage duration)**  
+ 1.**staticki**  
+ -static podatak se alocira za vreme prevodjenja; prevodilac poznaje njegovu adresu, pa se pristup do ovih podataka vrsi **memorijski direktno**  
+ 2.**lokalni**  
+ -njihov zivotni vek vezan je za vreme aktivacije potprograma u kojem se oni koriste 
+ -prostor za smestanje ovih objekata(argumenti fjue, povr vr...) se alocira staticki a ti podaci se adresiraju memorijskim direktnim adresiranjem; u pocetku vrednost alociranog podatka je neinicijalizovana  
+
+**Rekurzija**       
+-u jednom trenutku moze biti vise aktiviranih istih potprograma (vise nezavrsenih poziva) i svaki od aktiviranih potprograma mora da poseduje svoj skup instanci lokalnih podataka koje odgovaraju istim definicijama tip podataka
+-ukoliko dubina rekurzije zavisi od vrednosti argumenta funkcije (kao sto je slucaj sa faktorijelom) onda imamo jednostavniju situaciju  
+-ukoliko ne poznajemo dubinu rekurzije:  
+  -prilikom poziva potprograma stvara se **aktivacioni blok** - to je blok lokalnih podataka i argumenata; on se postavlja na kraj neke liste. 
+  -Instrukcije potprograma treba da referenciraju samo one podatke koji se nalaze u aktivacionom bloku koji je na kraju liste(to su oni podaci    koji su treutno aktuelni jer znamo kako se rekurzija odvija ok) Po povratku iz potprograma, aktivacioni blok sa kraja liste se brise(pa        prethodno pretposlednji blok postaje sada poslednji i tok kontrole dobija poziv odmah iz onog koji se upravo zavrsio)     
+  -Stek sluzi za implementaciju ove zamisli; linearna struktura; svaki el ima najvise jednog prethodnika i jednog sledbenika; dostupne su oeracije **push**-smestanje el na vrh steka tj kraj liste i **pop** skidanje vrha steka tj poslednje ubacenog elementa.
+    -na vrh steka ukazuje **engl. stack pointer**
+    **boldovano se odnosi na picoRISC:**
+    -izbor1 pri implementaciji steka: stek moze rasti ka visim ili ka **nizim** lokacijama u memoriji
+    -izbor2 pri implementaciji steka: sp moze ukazivati na **prvu slobodnu** ili poslednju zauzetu lokaciju u steku
+    **knjiga str 72,73 detaljnije sta se stavlja na stek pri pozivu...**
+  -
 
 
 ### ADRESIRANJE INSTRUKCIJA
