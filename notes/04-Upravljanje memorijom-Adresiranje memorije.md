@@ -189,11 +189,13 @@ load r1, [r0]
     **boldovano se odnosi na picoRISC:**
     -izbor1 pri implementaciji steka: stek moze rasti ka visim ili ka **nizim** lokacijama u memoriji
     -izbor2 pri implementaciji steka: sp moze ukazivati na **prvu slobodnu** ili poslednju zauzetu lokaciju u steku
-    **knjiga str 72,73 detaljnije sta se stavlja na stek pri pozivu...**
-  -
+    **knjiga str 72,73 detaljnije sta se stavlja na stek pri pozivu...**  
+-**repna rekurzija** poziv potprograma se odvija na samom kraju tog potprograma izakojeg taj potprogram ne koristi vise svoje lokalne podatke=> uvek mozemo da koristimo jedan aktivacioni blok=>rekurzija se pretvara u **petlju tj iteraciju**
+
+ukoliko se adresiranje podataka odradi nepravilno, npr u niz velicine 5 ti pokusavas da smesti 5 elementata je ok ali ako hoces da pristupa ili upises u sesti element niza deklarisanog na velicinu 5, ti neces znati koji ce biti ishod greske koju si napravio, nepoznate su adrese sa kojih citas ili na koje upisujes, nepoznate su vrednosti na tim adresama...        
 
 
-### ADRESIRANJE INSTRUKCIJA
+### ADRESIRANJE INSTRUKCIJA   
 
 ### PREVODJENJE
 
