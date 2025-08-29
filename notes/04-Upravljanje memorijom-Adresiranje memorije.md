@@ -223,7 +223,15 @@ ukoliko se adresiranje podataka odradi nepravilno, npr u niz velicine 5 ti pokus
         u pc stavlja novu vrednsot-adresa pocetka potprograma  
         DRUGA STVAR: instrukcija povratka iz potprograma (**ret na picoRISC**) stavlja su pc vrednost sa vrha steka+kupi staru vr PSW  
 (OVO SE IMPLICITNO DESAVA-U POZADINI.. NEMA VEZE SA TELOM FJE I ONIM CIME SE ONA BAVI.. ZATO NE ZABORAVI DA SE NA STEK STAVLJAJU LOKALNI PODACI (...aktivacioni blok; adresiranje podataka...) )  
-### PREVODJENJE
+### PREVODJENJE  
+
+-programi pisani na C/C++ programskim jezicima se **prevode u binarni masinski kod**  
+-**Prevodilac (engl. compiler)**
+        program koji prevodi kod napisan na visem programskom jeziku kao sto je recimo C/C++ u binarni masinski kod
+-Znamo da se program napisan u C/C++ sastoji od vise .c/.cpp fajlova (modula)-svaki ovaj fajl je **jedna jedinica prevodjenja(engl. compilation unit)** to znaci da se **svaki fajl prevodi nezavisno i odvojeno**-prevodilac kada prevodi 1 fajl ne izlazi iz granica tog fajla!!VAZNO!!  
+-Prevodjenjem jednog fajla prevodilac stvara jedan **.obj fajl** sa objektnim kodom (engl. object file)
+**bilo koja greska u prevodjenju dovodi do toga da se objektini fajl NE GENERISE** IPAK BEZ OBZIRA NA TO **PREVODILAC NASTAVLJA PREVODJENJE** pokusavajuci da prevazidje svaku gresku i **prijavi sve druge greske na koje mozda naidje!!**  
+
 
 ### POVEZIVANJE
 
