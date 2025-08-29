@@ -231,6 +231,25 @@ ukoliko se adresiranje podataka odradi nepravilno, npr u niz velicine 5 ti pokus
 -Znamo da se program napisan u C/C++ sastoji od vise .c/.cpp fajlova (modula)-svaki ovaj fajl je **jedna jedinica prevodjenja(engl. compilation unit)** to znaci da se **svaki fajl prevodi nezavisno i odvojeno**-prevodilac kada prevodi 1 fajl ne izlazi iz granica tog fajla!!VAZNO!!  
 -Prevodjenjem jednog fajla prevodilac stvara jedan **.obj fajl** sa objektnim kodom (engl. object file)
 **bilo koja greska u prevodjenju dovodi do toga da se objektini fajl NE GENERISE** IPAK BEZ OBZIRA NA TO **PREVODILAC NASTAVLJA PREVODJENJE** pokusavajuci da prevazidje svaku gresku i **prijavi sve druge greske na koje mozda naidje!!**  
+-Izvorni fajl se sastoji **iskljucivo iz deklaracija** tipova(i klasa), funkcija, objekata..  
+-**deklaracija** je **iskaz** koji uvodi identifikator u program, prevodilac prijavljuje gresku ukoliko naidjena identifikator koji prethodno nije deklarisan  
+-Prevodilac prevodi izvorni kod **linearno, sekvencijalno**  
+-Sta radi prevodilac, koji je redosled njegovog prevodjenja:  
+        1.Leksicka analiza: ucitane znakove grupise u vece celine tj lekseme  
+          -znaci koji pripadaju ISTOJ leksemi NISU razdvojeni razmakom  
+        2.Parsiranje: prevodilac na osnovu gramatike prepoznaje vece celine(recenice), ako naidje na neki prestup=>prijavljuje gresku  
+        3.Semanticka analiza: prevodilac proverava semanticka pravila za ove prepoznate vece celine, prijavljuje greske u slucaju iskakanja iz           pravila  
+          -kada naidje na novu deklaraciju, prevodilac dodaje identifikator cija je ta deklaracije u strukturu zvanu **tabela simbola**-ona cuva informacije o tipu i ostalim svojstvima entiteta ciji je identifikator ubacen.  
+        4.Generisanje koda: prevodilac generise sadrzaj u prevedenom objektnom fajlu za one elemente recenica za koje je to definisano                   semantikom jezika  
+          -Objektni fajl sadrzi: **alociran prostor** za staticke objekte(podatke) i **binarni masinski kod** za masinske instrukcije potprograma(funkcija)  
+-Prevodilac kada naidje na upotrebljen identifikator:  
+   -proverava da li je deklarisan tj da li je u tabeli simbola, da li je dostupan po pravilima jezika na tom mestu-ako nije prijavljuje gresku  
+   -da li je upotrebljen u skladu sa pravilima jezika: f++ ne moze ako je f naziv fje  
+   -zna kako da generise kod za upotrebu tog identifikatora ako je to definisano semantikom jezika  
+**definicija** : vrsta deklaracije u C/C++  
+int n=-16; je deklaracija globalnog statickog objekta koja je i definicija  
+-ima 1.deklarativni deo, ime, uvodi se u tabelu simbola  
+     2.inicijalizator -16 kojim se inicijalizuje objekat
 
 
 ### POVEZIVANJE
