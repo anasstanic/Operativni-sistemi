@@ -194,9 +194,35 @@ load r1, [r0]
 
 ukoliko se adresiranje podataka odradi nepravilno, npr u niz velicine 5 ti pokusavas da smesti 5 elementata je ok ali ako hoces da pristupa ili upises u sesti element niza deklarisanog na velicinu 5, ti neces znati koji ce biti ishod greske koju si napravio, nepoznate su adrese sa kojih citas ili na koje upisujes, nepoznate su vrednosti na tim adresama...        
 
-
 ### ADRESIRANJE INSTRUKCIJA   
-
+-Instrukcija skoka predstavlja uslovnu ili bezuslovnu promenu vrednosti PC  
+-Instrukcija skoka menja vrednost PC, umesto da ima adresu naredne instrukcije, PC ima adresu odredjenu u instrukciji skoka  
+-Adresa skoka odredjena je nekim nacinom adresirajna u instrukciji skoka:  
+**PC tokom izvrsavanja instrukcije ima vrednost adrese iza tekuce instrukcije**  
+**VRSTE ADRESIRANJA:**  
+        1.MEMORIJSKO DIREKTNO  
+          adresa odredisne instrukcije data je u samom polju instrukcije skoka; **apsolutni skok**  
+          jmp loop  
+        2.RELATIVNO ADRESIRANJE  
+          -najcesce u odnosu na tekucu vredosti registra PC  
+          -najcesce se koristi sa uslovnim skokovima  
+          -koriscenjem ovog adresiranja neki blok koda (if then else) ili neki potprogram postaje **relokabilan** tj ne zavisi od lokacije na             koju je smesten, jer ukoliko se prebaci na neku drugu adresu nece se morati menjati zapisane adrese u instrukcijama skokova  
+         --REGISTARSKO INDIREKTNO SA POMERAJEM  
+          odredisna adresa skoka se dobija dodavanjem pomeraja na trenutnu vrednost PC  
+          jmp [pc+loop-($+8)] <=> jmp loop  
+          racunanjem ovoga u [] dobijamo adresu loop iz tabele simbola, shvatamo da dobijamo istu vrednost adrese, samo smo koristili                    drugacije adresiranje; 8 je duzina tekuce instrukcije (to je verovatno ins skoka) ; ovaj deo loop-($+8) je pomeraj u odnosu na pc  
+        3.REGISTARSKO INDIREKTNO  
+        pozivi potprograma mogu se vrsiti indirektno, preko pokazivaca  
+        call [r0] adresa skoka nalazi se u registru r0
+-Nakon izvrsenog skoka na kod nekog potprograma na primer, mora se izvrsiti povratak na tacno narednu instrukciju iza instrukcije skoka; posto potprogrami mogu biti pozvani sa razlicitih mesta adresa povratka se odredjuje dinamicki: povratak iz potprograma se obavlja **indirektnim skokom**:  
+        -ukoliko nije podrzana rekurzija, pov adresu pozivalac upisuje odredjenu staticki alociranu **lokaciju u memoriji za tu namenu i taj potprogram ili cak u reg procesora** odakle ce je onda pozvani potprogram procitati prilikom povratka  
+        -ukoliko je podrzana rekurzija, pov adresa se prenosi na steku  
+**sta se zapravo desava:**  
+        PRVA STVAR: instrukcija poziva potprograma (**call na picoRISC**)stavlja staru vrednost pc na stek(adr naredne instrukcije-na nju ce se vratiti nakon povratka iz pp)+ stavlja staru vr PSW registra  
+        i  
+        u pc stavlja novu vrednsot-adresa pocetka potprograma  
+        DRUGA STVAR: instrukcija povratka iz potprograma (**ret na picoRISC**) stavlja su pc vrednost sa vrha steka+kupi staru vr PSW  
+(OVO SE IMPLICITNO DESAVA-U POZADINI.. NEMA VEZE SA TELOM FJE I ONIM CIME SE ONA BAVI.. ZATO NE ZABORAVI DA SE NA STEK STAVLJAJU LOKALNI PODACI (...aktivacioni blok; adresiranje podataka...) )  
 ### PREVODJENJE
 
 ### POVEZIVANJE
